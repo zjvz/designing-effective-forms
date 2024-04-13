@@ -18,7 +18,24 @@ async function fetchAndFillCountries() {
         }
         const data = await response.json();
         const countries = data.map(country => country.name.common);
+        const countryInput = document.getElementById('country');
         countryInput.innerHTML = countries.map(country => `<option value="${country}">${country}</option>`).join('');
+        getCountryByIP();
+
+        //filtrowanie nie dziala :(
+        countryInput.addEventListener('input', function() {
+            const filterValue = this.value.toUpperCase();
+            const options = countryInput.getElementsByTagName('option');
+
+            for (let i = 0; i < options.length; i++) {
+                const optionValue = options[i].textContent.toUpperCase();
+                if (optionValue.indexOf(filterValue) > -1) {
+                    options[i].style.display = '';
+                } else {
+                    options[i].style.display = 'none';
+                }
+            }
+        });
     } catch (error) {
         console.error('Wystąpił błąd:', error);
     }
@@ -28,16 +45,19 @@ function getCountryByIP() {
     fetch('https://get.geojs.io/v1/ip/geo.json')
         .then(response => response.json())
         .then(data => {
-            const country = data.country;
-            document.getElementById('countryName').textContent = country;
+            const countryName = data.country;
+            const countryInput = document.getElementById('country');
+            countryInput.value = countryName; // Ustawienie kraju w polu wyboru
+
+            // Pobranie kodu kraju na podstawie nazwy
+            getCountryCode(countryName);
         })
         .catch(error => {
             console.error('Błąd pobierania danych z serwera GeoJS:', error);
         });
 }
 
-function getCountryCode() {
-    const countryName = document.getElementById('countryName').textContent;
+function getCountryCode(countryName) {
     const apiUrl = `https://restcountries.com/v3.1/name/${countryName}?fullText=true`;
 
     fetch(apiUrl)
@@ -48,13 +68,14 @@ function getCountryCode() {
         return response.json();
     })
     .then(data => {        
-        const countryCode = data[0].idd.root + data[0].idd.suffixes.join("")
+        const countryCode = data[0].idd.root + data[0].idd.suffixes.join("");
+        const countryCodeInput = document.getElementById('countryCode');
+        countryCodeInput.value = countryCode; // Ustawienie numeru kierunkowego
     })
     .catch(error => {
         console.error('Wystąpił błąd:', error);
     });
 }
-
 
 (() => {
     // nasłuchiwania na zdarzenie kliknięcia myszką

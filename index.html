@@ -17,24 +17,45 @@
     <div class="container">
         <h1>Uzupełnij formularz</h1>
         <form id="form">
-            <div class="mb-3">
-                <label for="firstName" class="form-label">Imię</label>
-                <input type="text" class="form-control" id="firstName" placeholder="Wpisz imię" required>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label for="firstName" class="form-label">Imię</label>
+                    <input type="text" class="form-control" id="firstName" placeholder="Wpisz imię" required>
+                </div>
+                <div class="col-md-6"> 
+                    <label for="lastName" class="form-label">Nazwisko</label>
+                    <input type="text" class="form-control" id="lastName" placeholder="Wpisz nazwisko" required>
+                </div>
             </div>
             <div class="mb-3">
-                <label for="lastName" class="form-label">Nazwisko</label>
-                <input type="text" class="form-control" id="lastName" placeholder="Wpisz nazwisko" required>
+                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1">
             </div>
             <div class="mb-3">
                 <label for="street" class="form-label">Ulica</label>
                 <input type="text" class="form-control" id="street" placeholder="Wpisz ulicę" required>
             </div>
-            <div class="mb-3">
-                <label for="country" class="form-label">Kraj</label>
-                <select class="form-select" id="country" required>
-                    <option value="">Wybierz kraj</option>
-                    <!-- Options will be filled by JavaScript -->
-                </select>
+            <script>
+                document.addEventListener('DOMContentLoaded', fetchAndFillCountries);
+                document.addEventListener('DOMContentLoaded', getCountryByIP);
+            </script>
+            
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <label for="country" class="form-label">Kraj</label>
+                    <select class="form-select" id="country" required>
+                        <option value="">Wybierz kraj</option>
+                        <!-- Options will be filled by JavaScript -->
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="zipCode" class="form-label">Kod pocztowy</label>
+                    <input type="text" class="form-control" id="zipCode" placeholder="Wpisz kod pocztowy" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="city" class="form-label">Miasto</label>
+                    <input type="text" class="form-control" id="city" placeholder="Wpisz miasto" required>
+                </div>
             </div>
             <div class="row mb-3">
                 <label for="phoneNumber" class="form-label">Numer telefonu komórkowego</label>
@@ -49,56 +70,85 @@
                         required>
                 </div>
             </div>
-            <div class="mb-3">
-                <label for="city" class="form-label">Miasto</label>
-                <input type="text" class="form-control" id="city" placeholder="Wpisz miasto" required>
-            </div>
-            <div class="mb-3">
-                <label for="zipCode" class="form-label">Kod pocztowy</label>
-                <input type="text" class="form-control" id="zipCode" placeholder="Wpisz kod pocztowy" required>
-            </div>
-            <div class="mb-3">
-                <label for="shippingMethod" class="form-label">Rodzaj przesyłki</label>
-                <select class="form-select" id="shippingMethod" required>
-                    <option value="">Wybierz rodzaj przesyłki</option>
-                    <option value="DPD">DPD</option>
-                    <option value="InPost">InPost</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="paymentMethod" class="form-label">Rodzaj płatności</label>
-                <select class="form-select" id="paymentMethod" required>
-                    <option value="">Wybierz rodzaj płatności</option>
-                    <option value="karta">Karta</option>
-                    <option value="blik">BLIK</option>
-                    <option value="pośrednik">Pośrednik płatności</option>
-                </select>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Rodzaj przesyłki</label><br>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="shippingMethod" id="dpdRadio" value="DPD" required>
+                            <label class="form-check-label" for="dpdRadio">DPD</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="shippingMethod" id="inpostRadio" value="InPost" required>
+                            <label class="form-check-label" for="inpostRadio">InPost</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Rodzaj płatności</label><br>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="paymentMethod" id="kartaRadio" value="karta" required>
+                            <label class="form-check-label" for="kartaRadio">Karta</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="paymentMethod" id="blikRadio" value="blik" required>
+                            <label class="form-check-label" for="blikRadio">BLIK</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="paymentMethod" id="posrednikRadio" value="pośrednik" required>
+                            <label class="form-check-label" for="posrednikRadio">Pośrednik płatności</label>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Dodatkowe pola, np. dane do faktury -->
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1">
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
-            </div>
-            <div class="mb-3 form-check">
+             <!--- hasla nie powinno byc, usunac (jesli zawiera skomplikowane rzeczy to hint z czego powinno sie skladac)--->
+             <div class="mb-3 form-check">
                 <input type="checkbox" class="form-check-input" id="vatUE">
                 <label class="form-check-label" for="vatUE">VAT UE</label>
             </div>
-            <div class="mb-3">
+            <div class="mb-3" id="vatNumberContainer" style="display: none;">
                 <label for="vatNumber" class="form-label">VAT Number</label>
                 <input type="text" class="form-control" id="vatNumber" aria-describedby="vatHelp">
-                <div id="vatHelp" class="form-text">Kod kraju państwa członkowskiego i seria cyfr unikalnych dla tego
-                    podmiotu gospodarczego.</div>
+                <div id="vatHelp" class="form-text">Kod kraju państwa członkowskiego i seria cyfr unikalnych dla tego podmiotu gospodarczego.</div>
             </div>
-
-            <div class="mb-3">
+            <div class="mb-3" id="invoiceDataContainer" style="display: none;">
                 <label for="invoiceData" class="form-label">Dane do faktury</label>
                 <textarea class="form-control" id="invoiceData" rows="3" placeholder="Wpisz dane do faktury"></textarea>
             </div>
+
+        <script>
+            function getInvoiceData() {
+                var firstName = document.getElementById('firstName').value;
+                var lastName = document.getElementById('lastName').value;
+                var street = document.getElementById('street').value;
+                var zipCode = document.getElementById('zipCode').value;
+                var city = document.getElementById('city').value;
+
+                var invoiceData = firstName + ' ' + lastName + '\n' +
+                                  street + '\n' +
+                                  zipCode + ' ' + city;
+                
+                return invoiceData;
+            }
+
+            document.getElementById('vatUE').addEventListener('change', function() {
+                var vatNumberContainer = document.getElementById('vatNumberContainer');
+                var invoiceDataContainer = document.getElementById('invoiceDataContainer');
+
+                if (this.checked) {
+                    vatNumberContainer.style.display = 'block';
+                    invoiceDataContainer.style.display = 'block';
+                    document.getElementById('invoiceData').value = getInvoiceData();
+                } else {
+                    vatNumberContainer.style.display = 'none';
+                    invoiceDataContainer.style.display = 'none';
+                    document.getElementById('invoiceData').value = '';
+                }
+            });
+        </script>
 
             <button type="submit" class="btn btn-primary" data-bs-toggle="modal"
                 data-bs-target="#form-feedback-modal">submit</button>
