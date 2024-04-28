@@ -1,0 +1,11 @@
+temp/
+*.tmp
+
+# Ignorowanie plików konfiguracyjnych
+config.ini
+
+# Ignorowanie plików wygenerowanych przez środowisko programistyczne
+node_modules/
+*.log
+
+data.js

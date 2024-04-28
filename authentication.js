@@ -4,14 +4,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/fireba
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
 
 // Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyCjwFFynUyr8f7ogiKgNnl9moE707Rodi8",
-  authDomain: "lab4-519bd.firebaseapp.com",
-  projectId: "lab4-519bd",
-  storageBucket: "lab4-519bd.appspot.com",
-  messagingSenderId: "404399796081",
-  appId: "1:404399796081:web:efb17986ddf13d5d1010d0"
-};
+import firebaseConfig from './file2.js';
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
