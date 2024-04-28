@@ -4,7 +4,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/fireba
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
 
 // Your web app's Firebase configuration
-import firebaseConfig from './file2.js';
+import { firebaseConfig } from './data.js';
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
